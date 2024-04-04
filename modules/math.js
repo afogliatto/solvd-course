@@ -6,7 +6,7 @@ class Operations {
 
     for (let i = 0; i < maxLength; i++) {
       let num1 = parseInt(x[x.length - 1 - i] || 0);
-      let num2 = parseInt(x[x.length - 1 - i] || 0);
+      let num2 = parseInt(y[y.length - 1 - i] || 0);
       let sum = num1 + num2 + carry;
 
       result = (sum % 10) + result;
@@ -79,7 +79,13 @@ class Operations {
   };
 
   div = (dividend, divisor) => {
-    // Compare arrays function defined directly inside the div method
+    const dividendArray = dividend.split('').map(Number);
+    const divisorArray = divisor.split('').map(Number);
+
+    if (parseInt(divisor) === 0) {
+      return 'Error: Division by zero';
+    }
+
     const compareArrays = (arr1, arr2) => {
       if (arr1.length !== arr2.length) {
         return arr1.length - arr2.length;
@@ -92,50 +98,26 @@ class Operations {
       return 0;
     };
 
-    const dividendArray = dividend.split('').map(Number);
-    const divisorArray = divisor.split('').map(Number);
-
     if (compareArrays(dividendArray, divisorArray) < 0) {
       return 'Error: Divisor is greater than or equal to dividend.';
     }
 
-    let dividendLarger = false;
-    if (dividend.length > divisor.length) {
-      dividendLarger = true;
-    } else if (dividend.length === divisor.length) {
-      for (let i = 0; i < dividend.length; i++) {
-        if (dividendArray[i] > divisorArray[i]) {
-          dividendLarger = true;
-          break;
-        } else if (dividendArray[i] < divisorArray[i]) {
-          break;
-        }
-      }
-    }
-
-    if (!dividendLarger) {
-      return 'Error: Divisor is greater than or equal to dividend.';
-    }
-
-    const quotient = Array(dividendArray.length).fill(0);
-
+    let quotient = [];
     let remainder = 0;
-    let currentDigit;
 
     for (let i = 0; i < dividendArray.length; i++) {
-      currentDigit =
-        ((remainder * 10 + dividendArray[i]) / divisorArray[0]) | 0;
-      quotient[i] = currentDigit;
-
-      remainder =
-        remainder * 10 + dividendArray[i] - currentDigit * divisorArray[0];
+      let currentDigit = Math.floor(
+        (remainder * 10 + dividendArray[i]) / parseInt(divisor),
+      );
+      quotient.push(currentDigit);
+      remainder = (remainder * 10 + dividendArray[i]) % parseInt(divisor);
     }
 
-    let quotientString = quotient.join('');
+    while (quotient.length > 1 && quotient[0] === 0) {
+      quotient.shift();
+    }
 
-    quotientString = quotientString.replace(/^0+/, '');
-
-    return quotientString || '0';
+    return quotient.join('') || '0';
   };
 }
 
