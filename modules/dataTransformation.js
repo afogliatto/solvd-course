@@ -1,23 +1,15 @@
 function addValues(a, b) {
-  // Check if both arguments have the same type
   if (typeof a === 'number') {
     if (typeof b === 'number') {
-      return a + b;
-    }
-    if (typeof b === 'string' && !isNaN(b)) {
-      b = Number(b);
       return a + b;
     } else {
       return 'Addition not possible with the provided types';
     }
   }
-  if (typeof a === 'string' && !isNaN(a)) {
-    a = Number(a);
+  if (typeof a === 'string') {
     if (typeof b === 'number') {
-      return a + b;
-    } else if (typeof b === 'string' && !isNaN(b)) {
-      a = Number(a);
-      b = Number(b);
+      return 'Addition not possible with the provided types';
+    } else if (typeof b === 'string') {
       return a + b;
     }
   }
@@ -116,9 +108,40 @@ function coerceToType(value, type) {
       }
   }
 }
+
+function convertToNumber(value) {
+  if (typeof value === 'string') {
+    // Try parsing string to float
+    let floatValue = parseFloat(value);
+    if (!isNaN(floatValue)) {
+      return floatValue;
+    } else {
+      // Try parsing string to integer
+      let intValue = parseInt(value);
+      if (!isNaN(intValue)) {
+        return intValue;
+      } else {
+        return 'Unable to convert string to number';
+      }
+    }
+  } else if (typeof value === 'number') {
+    // For numbers, return as is
+    return value;
+  } else {
+    // For other types, try converting using unary plus operator
+    let convertedValue = +value;
+    if (!isNaN(convertedValue)) {
+      return convertedValue;
+    } else {
+      return 'Unable to convert to number';
+    }
+  }
+}
+
 module.exports = {
   addValues,
   stringifyValue,
   invertBoolean,
-  coerceToType
+  coerceToType,
+  convertToNumber
 };
