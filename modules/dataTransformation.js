@@ -38,29 +38,15 @@ function coerceToType(value, type) {
   switch (type) {
     case 'string':
       if (typeof value === 'string') {
-        return 'Value is already a string';
-      }
-      if (typeof value === 'number') {
-        return String(value);
-      }
-      if (typeof value === 'boolean') {
-        return String(value);
-      }
-      if (typeof value === 'object') {
-        return JSON.stringify(value);
+        return 'Value is already a string'
+      } else {
+        return stringifyValue(value)
       }
     case 'number':
       if (typeof value === 'number') {
-        return 'Value is already a number';
-      }
-      if (typeof value === 'string') {
-        return Number(value);
-      }
-      if (typeof value === 'boolean') {
-        return Number(value);
-      }
-      if (typeof value === 'object') {
-        return "Can't coerce";
+        return 'Value is already a number'
+      } else {
+        return convertToNumber(value);
       }
     case 'boolean':
       if (typeof value === 'boolean') {
