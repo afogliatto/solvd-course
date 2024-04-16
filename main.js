@@ -1,6 +1,7 @@
 const math = require("./modules/math")
 const String = new math.Operations()
-const dataTransformation = require ("./modules/dataTransformation")
+const dataTransformation = require("./modules/dataTransformation")
+const task1 = require("./modules/task1")
 
 // Homework Number 1
 console.log("Homework #1")
@@ -85,3 +86,5 @@ console.log(dataTransformation.convertToNumber(123));
 console.log(dataTransformation.convertToNumber(true)); 
 console.log(dataTransformation.convertToNumber(false));
 console.log(dataTransformation.convertToNumber(null)); 
+
+
