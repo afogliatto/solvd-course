@@ -1,4 +1,10 @@
 function calculateDiscountedPrice(products, discountPercentage) {
+  if (discountPercentage < 0) {
+    throw new Error("Discount percentage cannot be negative")
+  }
+  if (discountPercentage > 100) {
+    throw new Error ("Discount percentage cannot be over 100%")
+  }
   const discountedProducts = [];
 
   for (let i = 0; i < products.length; i++) {
