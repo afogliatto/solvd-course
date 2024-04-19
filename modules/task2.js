@@ -20,7 +20,18 @@ const sortedUniqueWords = (array) => array.sort();
 const filterUniqueWords = (text) =>
   sortedUniqueWords(uniqueElements(wordsToArray(text)));
 
+const getAverageGrade = (students) => students.map(studentAverageGrade);
+
+const average = (arr) => arr.reduce((acc, val) => acc + val, 0) / arr.length;
+
+const studentAverageGrade = (student) => ({
+  name: student.name,
+  averageGrade: average(student.grades),
+});
+
+  
 module.exports = {
   getFullName,
-  filterUniqueWords
- }
+  filterUniqueWords,
+  getAverageGrade,
+};
