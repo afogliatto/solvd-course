@@ -1,12 +1,11 @@
 function observeObject(obj, callback) {
     return new Proxy(obj, {
     get(target, property, receiver) {
-      const value = Reflect.get(target, property, receiver);
-      callback(property, value);
-      return value;
+      callback(property, 'get');
+      return Reflect.get(target, property, receiver);
     },
     set(target, property, value, receiver) {
-      callback(property, value);
+      callback(property, 'set', value);
       return Reflect.set(target, property, value, receiver);
     },
   });

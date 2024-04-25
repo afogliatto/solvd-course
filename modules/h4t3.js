@@ -9,23 +9,28 @@ const bankAccount = {
     this._balance = newBalance;
   },
 
-  transfer(targetAccount, amount) {
-    if (amount <= 0 || amount > this._balance) {
-      console.log('Invalid transfer amount');
+  transfer(sourceAccount, targetAccount, amount) {
+    if (amount <= 0 || amount > sourceAccount._balance) {
+      console.log('Invalid transfer amount or insufficient funds');
       return;
     }
-    this._balance -= amount;
-    targetAccount._balance += amount; // Use the balance setter directly
-    console.log(`Transferred $${amount} to target account.`);
+    sourceAccount._balance -= amount;
+    targetAccount._balance += amount;
+    console.log(
+      `Transferred $${amount} from ${sourceAccount.name} to ${targetAccount.name}.`,
+    );
   },
 };
 
 // Create two separate instances of bankAccount
 
 const myAccount = Object.create(bankAccount);
+myAccount.name = "My Account"
 const friendAccount = Object.create(bankAccount);
+friendAccount.name = "Friend Account"
 
 module.exports = {
+  bankAccount,
   myAccount,
-  friendAccount
-}
+  friendAccount,
+};

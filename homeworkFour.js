@@ -50,12 +50,12 @@ console.log('Task 3');
 console.log(h4t3.myAccount.formattedBalance);
 console.log(h4t3.friendAccount.formattedBalance);
 
-h4t3.myAccount.transfer(h4t3.friendAccount, 15000);
+h4t3.bankAccount.transfer(h4t3.myAccount, h4t3.friendAccount, 15000);
 
 console.log(h4t3.myAccount.formattedBalance);
 console.log(h4t3.friendAccount.formattedBalance);
 
-h4t3.myAccount.transfer(h4t3.friendAccount, 500);
+h4t3.bankAccount.transfer(h4t3.myAccount, h4t3.friendAccount, 500);
 
 console.log(h4t3.myAccount.formattedBalance);
 console.log(h4t3.friendAccount.formattedBalance);
@@ -94,8 +94,14 @@ const dude = {
   city: 'Tucuman',
 };
 
-function callback(property, value) {
-  console.log(`Property '${property}' accessed/modified with value:`, value);
+function callback(property, action, value) {
+  if (action === 'set') {
+  console.log(`Property '${property}' 'modified (set) with value:`, value);
+
+  } else {
+    console.log(`Property '${property}' 'accessed (get)`);
+
+  }
 }
 
 console.log(dude);
