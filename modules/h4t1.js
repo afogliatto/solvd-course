@@ -21,12 +21,16 @@ Object.defineProperty(person, 'email', {
 person.updateInfo = function (newInfo) {
   for (let prop in newInfo) {
     if (this.hasOwnProperty(prop)) {
-      Object.defineProperty(this, prop, {
-        value: newInfo[prop],
-        writable: false,
-        configurable: false,
-        enumerable: true,
-      });
+      if (prop === 'address') {
+        this[prop] = newInfo[prop]; // Direct assignment for address property
+      } else {
+        Object.defineProperty(this, prop, {
+          value: newInfo[prop],
+          writable: false,
+          configurable: false,
+          enumerable: true,
+        });
+      }
     }
   }
 };
