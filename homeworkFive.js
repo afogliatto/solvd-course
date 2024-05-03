@@ -12,11 +12,15 @@ const objectsArray = [
   { id: 1, name: 'John' },
   { id: 2, name: 'Alice' },
   { id: 3, name: 'Bob' },
-  { id: 4, name: 'John' },
+  { id: 4, name: 'Agustin' },
+  { id: 5, name: 'Tomas' },
+  { id: 5, name: 'Alice' },
+  { id: 5, name: 'Bob' },
+  { id: 5, name: 'Alexandrina' },
   { id: 5, name: 'Alice' },
 ];
 
-const callback = (element) => element.name;
+const callback = (obj) => obj.name;
 
 const uniqueObjectsArray = h5t1.customFilterUnique(objectsArray, callback);
 console.log(uniqueObjectsArray);
