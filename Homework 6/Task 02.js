@@ -1,7 +1,7 @@
 function highlightKeywords(template, keywords) {
-  const highlighted = keywords.reduce((result, keyword) => {
+  const highlighted = keywords.reduce((result, keyword, index) => {
     return result.replace(
-      new RegExp(keyword, 'g'),
+      new RegExp(`\\$\\{${index}\\}`, 'g'),
       `<span class='highlight'>${keyword}</span>`,
     );
   }, template);
