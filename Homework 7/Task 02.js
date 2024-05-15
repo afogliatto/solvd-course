@@ -1,12 +1,23 @@
 function promiseAllSettled(promises) {
-  return Promise.all(
-    promises.map((p) =>
+  return new Promise((resolve) => {
+    let settledPromises = [];
+    let settledCount = 0;
+    promises.forEach((p, index) => {
       p.then(
-        (value) => ({ status: 'fulfilled', value }),
-        (reason) => ({ status: 'rejected', reason }),
-      ),
-    ),
-  );
+        (value) => {
+          settledPromises[index] = { status: 'fulfilled', value };
+        },
+        (reason) => {
+          settledPromises[index] = { status: 'rejected', reason };
+        },
+      ).finally(() => {
+        settledCount++;
+        if (settledCount === promises.length) {
+          resolve(settledPromises);
+        }
+      });
+    });
+  });
 }
 
 // Example usage:
