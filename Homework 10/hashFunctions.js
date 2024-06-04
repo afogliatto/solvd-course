@@ -1,5 +1,3 @@
-// hashFunctions.js
-
 /**
  * A class representing a hash table with a custom hash function.
  */
